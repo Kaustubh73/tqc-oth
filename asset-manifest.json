@@ -1,7 +1,7 @@
 {
-  "main.css": "/tqc-oth/static/css/main.2f1fcae2.chunk.css",
-  "main.js": "/tqc-oth/static/js/main.16b69141.chunk.js",
-  "main.js.map": "/tqc-oth/static/js/main.16b69141.chunk.js.map",
+  "main.css": "/tqc-oth/static/css/main.3320f8d6.chunk.css",
+  "main.js": "/tqc-oth/static/js/main.1c058d46.chunk.js",
+  "main.js.map": "/tqc-oth/static/js/main.1c058d46.chunk.js.map",
   "static/js/1.4587b355.chunk.js": "/tqc-oth/static/js/1.4587b355.chunk.js",
   "static/js/1.4587b355.chunk.js.map": "/tqc-oth/static/js/1.4587b355.chunk.js.map",
   "static/js/2.6422faee.chunk.js": "/tqc-oth/static/js/2.6422faee.chunk.js",
@@ -9,8 +9,8 @@
   "runtime~main.js": "/tqc-oth/static/js/runtime~main.86453466.js",
   "runtime~main.js.map": "/tqc-oth/static/js/runtime~main.86453466.js.map",
   "static/media/Puzzle1.jpg": "/tqc-oth/static/media/Puzzle1.f75c532b.jpg",
-  "static/css/main.2f1fcae2.chunk.css.map": "/tqc-oth/static/css/main.2f1fcae2.chunk.css.map",
+  "static/css/main.3320f8d6.chunk.css.map": "/tqc-oth/static/css/main.3320f8d6.chunk.css.map",
   "index.html": "/tqc-oth/index.html",
-  "precache-manifest.93c30e49e170b7f4e043a496cfafaf3e.js": "/tqc-oth/precache-manifest.93c30e49e170b7f4e043a496cfafaf3e.js",
+  "precache-manifest.1262d15c724c2333aa29d9b4c3b0a21f.js": "/tqc-oth/precache-manifest.1262d15c724c2333aa29d9b4c3b0a21f.js",
   "service-worker.js": "/tqc-oth/service-worker.js"
 }

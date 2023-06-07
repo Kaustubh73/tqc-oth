@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "16b691410116cad0fb9f",
-    "url": "/tqc-oth/static/css/main.2f1fcae2.chunk.css"
+    "revision": "1c058d4679334b9058b0",
+    "url": "/tqc-oth/static/css/main.3320f8d6.chunk.css"
   },
   {
-    "revision": "16b691410116cad0fb9f",
-    "url": "/tqc-oth/static/js/main.16b69141.chunk.js"
+    "revision": "1c058d4679334b9058b0",
+    "url": "/tqc-oth/static/js/main.1c058d46.chunk.js"
   },
   {
     "revision": "4587b35573b7dda0a77d",
@@ -24,7 +24,7 @@ self.__precacheManifest = [
     "url": "/tqc-oth/static/media/Puzzle1.f75c532b.jpg"
   },
   {
-    "revision": "302b2016130a97be26c672be794334a8",
+    "revision": "9b521b824d4fa359fa759c90141be78f",
     "url": "/tqc-oth/index.html"
   }
 ];
