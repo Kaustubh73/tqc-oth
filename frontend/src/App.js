@@ -1,34 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react'
+import Header from './Header';
 
-function MyButton() {
+function WelcomeMessage() {
   return (
-    <button>I'm a button</button>
-  )
+    <div className="welcome-message">
+      <h1>The Trio Treasure Hunt!</h1>
+      <p>Get ready for an exciting adventure filled with puzzles, challenges, and rewards.</p>
+      <button>Start the Hunt</button>
+    </div>
+  );
 }
+
 const user = {
   name: 'Hedy Lamarr',
   imageUrl: 'https://i.imgur.com/yXOvdOSs.jpg',
   imageSize: 90,
 };
+
 function App() {
   return (
     <div className="App">
-      <h1>The Trio Competition</h1>
-      <p>Hello there. <br/> How you doin? </p>
-      <img src={logo} className="App-logo "/>
-      <p> <br/></p>
-      <MyButton />
+      <Header />
+      <WelcomeMessage />
       <p> {user.name} </p>
-      <img
-        className="avatar"
-        src={user.imageUrl}
-        alt={'Photo of' + user.name}
-        style = {{
-          width: user.imageSize,
-          height: user.imageSize
-        }}
-      />
+      <img src = {user.imageUrl} alt={user.name}/>
+      <p> {user.name} </p>
+      <img src = {user.imageUrl} alt={user.name}/>
+      <p> {user.name} </p>
+      <img src = {user.imageUrl} alt={user.name}/>
+      <p> {user.name} </p>
+      <img src = {user.imageUrl} alt={user.name}/>
     </div>
   );
 }

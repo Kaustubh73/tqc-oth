@@ -1,0 +1,45 @@
+.header {
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    color: black;
+    padding: 10px;
+    z-index: 100;
+  }
+  
+.logo {
+    margin-top: 0px;
+    height: 7vmin;
+    pointer-events: none;
+  }
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav li {
+    margin-right: 25px;
+  }
+  
+.nav a {
+    text-decoration: none;
+    color: black;
+  }
+
+.nav a:hover {
+    text-decoration: underline;
+  }
+
+.nav-text    {
+    margin-top: 25px;
+}
