@@ -27,6 +27,14 @@
 .welcome-message p {
   color: whitesmoke;
 }
+
+.featured {
+  background-color: #ffa504;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
