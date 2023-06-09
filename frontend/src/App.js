@@ -3,6 +3,7 @@ import React from 'react'
 import Header from './Header';
 import sudoku from './images/Sudoku.png'
 import bacon from './images/Question 2.png'
+import q3 from './images/Question 3.png'
 function FeaturedContent() {
   const currContest = {
     name: "Trio Quiz Competition 2.0",
@@ -64,9 +65,15 @@ function Homepage() {
   },
   {
     title: 'Bold Pigs',
-    description: 'qwerty',
-    description2: 'meafho',
+    description: 'Not everything needs to be hidden for them to be hard. Every single information you need to solve this puzzle is given on the image and the title. If you look at the image inside this question, you see a little something, hinting you further towards the answer.',
+    description2: '',
     imageUrl: bacon,
+  },
+  {
+    title: 'The Unimportant Order',
+    description: 'This one is quite straight forward, it is what you see in the image, just to test your math skills at best :). Do you have enough math power to be able to solve this question, only time will tell.',
+    description2: '',
+    imageUrl: q3,
   },
 ];
   let PuzzleCount = 0;
