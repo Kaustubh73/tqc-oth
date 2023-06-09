@@ -10,11 +10,6 @@
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 .welcome-message {
   margin-top: 60px;
   padding: 25px;
@@ -85,26 +80,59 @@
   font-size: 16px;
   margin-bottom: 8px;
 }
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .welcome-message {
+    margin-top: 50px;
+    padding: 70px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .featured {
+    padding: 70px;
+  }
+
+  .featured h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  .featured p {
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+
+  .featured button {
+    padding: 8px 16px;
+    font-size: 16px;
+  }
+
+  .puzzle-showcase {
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+
+  .puzzle-image {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .puzzle-image img {
+    max-width: 300px;
+    height: auto;
+  }
+
+  .puzzle-description {
+    margin-right: 0;
+  }
+
+  .puzzle-description h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  .puzzle-description p {
+    font-size: 14px;
+    margin-bottom: 6px;
   }
 }

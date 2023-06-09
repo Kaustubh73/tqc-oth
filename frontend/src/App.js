@@ -1,6 +1,7 @@
 import './App.css';
 import React from 'react'
 import Header from './Header';
+import Footer from './Footer';
 import sudoku from './images/Sudoku.png'
 import bacon from './images/Question 2.png'
 import q3 from './images/Question 3.png'
@@ -76,7 +77,6 @@ function Homepage() {
     imageUrl: q3,
   },
 ];
-  let PuzzleCount = 0;
   return (
     <div>
     <div className="welcome-message">
@@ -93,18 +93,13 @@ function Homepage() {
   );
 }
 
-const user = {
-  Username: 'Hedy Laamarr',
-  imageUrl: 'https://i.imgur.com/yXOvdOSs.jpg',
-  imageSize: 90,
-};
 
 function App() {
   return (
     <div className="App">
       <Header />
       <Homepage />
-
+      <Footer />
     </div>
   );
 }
