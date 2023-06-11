@@ -3,11 +3,52 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import SignUp from './pages/SignUp'
+import Login from './pages/Login'
+import Puzzles from './pages/Puzzles'
+import Contests from './pages/Contests'
+import Leaderboard from './pages/Leaderboard'
+import ContactUs from './pages/ContactUs'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App/>,
+  },
+  {
+    path: "signup",
+    element: <SignUp/>,
+  },
+  {
+    path: "login",
+    element: <Login/>,
+  },
+  {
+    path: "puzzles",
+    element: <Puzzles/>,
+  },
+  {
+    path: "contests",
+    element: <Contests/>,
+  },
+  {
+    path: "leaderboard",
+    element: <Leaderboard/>,
+  },
+  {
+    path: "contactus",
+    element: <ContactUs/>,
+  },
+]);
+
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 

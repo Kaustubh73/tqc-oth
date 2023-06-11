@@ -1,10 +1,12 @@
-import './App.css';
+import './css/App.css';
 import React from 'react'
-import Header from './Header';
-import Footer from './Footer';
+import NavBar from './components/NavBar'
+import Footer from './components/Footer';
 import sudoku from './images/Sudoku.png'
 import bacon from './images/Question 2.png'
 import q3 from './images/Question 3.png'
+import Login from './pages/Login'
+import {Routes, Route} from 'react-router-dom'
 function FeaturedContent() {
   const currContest = {
     name: "Trio Quiz Competition 2.0",
@@ -97,7 +99,13 @@ function Homepage() {
 function App() {
   return (
     <div className="App">
-      <Header />
+      <Routes>
+        {/* <Switch> */}
+        <Route path="/login" component={Login} />
+        <Route path="/" component={App} />          
+        {/* </Switch> */}
+      </Routes>
+      <NavBar />
       <Homepage />
       <Footer />
     </div>
