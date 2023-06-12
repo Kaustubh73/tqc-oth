@@ -1,12 +1,12 @@
 import './css/App.css';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer';
 import sudoku from './images/Sudoku.png'
 import bacon from './images/Question 2.png'
 import q3 from './images/Question 3.png'
 import Login from './pages/Login'
-import {Routes, Route} from 'react-router-dom'
+import {Routes, Route, useLocation}  from 'react-router-dom'
 function FeaturedContent() {
   const currContest = {
     name: "Trio Quiz Competition 2.0",
@@ -58,7 +58,7 @@ function Puzzle({ puzzle, index }) {
     </div>
   );
 }
-function Homepage() {
+function Homepage(props) {
   const puzzles = [
   {
     title:  'Dot Dot Dottie Dot',
@@ -97,16 +97,34 @@ function Homepage() {
 
 
 function App() {
+  const location = useLocation();
+  console.log(location)
+  const [name, setName] = useState('');
+
+  useEffect(() => {
+    (
+      async () => {
+        const response = await fetch('http://localhost:8000/api/user', {
+            headers: {'Content-Type': 'application/json'},
+            credentials: 'include',
+        });
+
+        const content = await response.json();
+
+        setName(content.name);
+      }
+    )();
+  });
   return (
     <div className="App">
       <Routes>
         {/* <Switch> */}
-        <Route path="/login" component={Login} />
+        <Route path="/login" component={() => <Login setName={setName}/>} />
         <Route path="/" component={App} />          
         {/* </Switch> */}
       </Routes>
-      <NavBar />
-      <Homepage />
+      <NavBar name={name} setName={setName}/>
+      <Homepage name = {location.state.name}/>
       <Footer />
     </div>
   );

@@ -3,11 +3,12 @@ import NavBar from '../components/NavBar';
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../css/Signup.css'
 
-const Login = (props) => {
+function Login(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
-    
+    const navigate = useNavigate();
+
     const handleLogin = async(e) => {
         e.preventDefault();
 
@@ -20,16 +21,17 @@ const Login = (props) => {
                 password
             })
         });
-
+        
         const content = await response.json();
+        // props.setName(content.name);
         setRedirect(true);
         // props.setName(content.name);
-    };
-    const navigate = useNavigate();
+    }
 
     if (redirect) {
-        navigate('/');
+        navigate('/',  { state: { name: props.name, setName:props.setName } })
     }
+
     return (
         <div>
             <NavBar></NavBar>

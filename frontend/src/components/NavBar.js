@@ -4,7 +4,7 @@ import logo from '../images/Puzzle1.jpg';
 import menu from '../images/MenuBar.png';
 import { Link } from "react-router-dom";
 
-function Desktop() {
+function Desktop(props) {
     return (
         <header className='header'>
         <nav className='nav'>
@@ -17,15 +17,24 @@ function Desktop() {
                 <li className='nav-text'><Link to="/contactus">Contact Us</Link></li>
             </ul>
         </nav>
-        <div className='user-reg'>
-            <Link to="/signup"><button>Sign Up</button></Link>
-            <Link to="/login"><button>Log In</button></Link>
-        </div>
+        {props.name ? 
+            <div className='user-reg'>
+                <p>Welcome {props.name}</p>
+                <Link to='/login' onClick={props.logout}><button>Logout</button></Link>
+            </div>
+        : 
+            <div className='user-reg'>
+                <Link to="/signup"><button>Sign Up</button></Link>
+                <Link to="/login"><button>Log In</button></Link>
+            </div>
+        }
+
     </header>
     )
 }
 
 function DropDown() {
+    
     return (
         <header className='header'>
             <a href="/homepage"><img src={logo} className='logo' alt='Homepage'/></a>
@@ -41,11 +50,20 @@ function DropDown() {
         </header>
     )
 }
-function NavBar() {
+function NavBar(props) {
+    const logout = async () => {
+        await fetch('http://localhost:8000/api/logout', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            credentials: 'include',
+        });
+
+        props.setName('');
+    }    
     const isMobile = window.innerWidth <= 768;
     return (
         <div>
-            {isMobile ? <DropDown/> : <Desktop/>}
+            {isMobile ? <DropDown/> : <Desktop name={props.name} logout={logout}/>}
         </div>
     );
 }
