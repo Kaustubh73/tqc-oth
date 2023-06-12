@@ -1,11 +1,9 @@
-import React, {SyntheticEvent, useState} from 'react';
-import {useNavigate, useLocation} from 'react-router-dom';
+import React, { useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import '../css/Signup.css'
 
 function SignUp(props) { 
-    const location = useLocation();
-    console.log(location)
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -56,7 +54,6 @@ function SignUp(props) {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     <button type='submit'>Submit</button>
-                    <h1>Hello {location.state.yes}</h1>
                 </form>
             </div>
         </div>

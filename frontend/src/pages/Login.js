@@ -1,6 +1,6 @@
-import React, {SyntheticEvent, useState} from 'react';
+import React, { useState} from 'react';
 import NavBar from '../components/NavBar';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../css/Signup.css'
 
 function Login(props) {
@@ -22,7 +22,7 @@ function Login(props) {
             })
         });
         
-        const content = await response.json();
+        // const content = await response.json();
         // props.setName(content.name);
         setRedirect(true);
         // props.setName(content.name);

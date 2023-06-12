@@ -81,6 +81,19 @@
   margin-bottom: 8px;
 }
 
+/* .featured {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.featured-gap {
+  margin-right: 20px;
+}
+
+.countdown {
+  flex-grow: 1;
+} */
 /* Media Queries for Responsive Design */
 @media (max-width: 768px) {
   .welcome-message {

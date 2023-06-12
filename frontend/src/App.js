@@ -2,6 +2,7 @@ import './css/App.css';
 import React, { useEffect, useState } from 'react'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer';
+import ContestCountdownTimer from './components/ContestCountdownTimer';
 import sudoku from './images/Sudoku.png'
 import bacon from './images/Question 2.png'
 import q3 from './images/Question 3.png'
@@ -16,12 +17,17 @@ function FeaturedContent() {
   };
 
   return (
-    <div>
-      <h2>{currContest.name}</h2>
-      <p>{currContest.duration}</p>
-      <p>{currContest.instructions}</p>
-      <p>{currContest.prizes}</p>
-      <button>Join the Contest</button>
+    <div className='featured'>
+      <div className='featured-gap'>
+        <h2>{currContest.name}</h2>
+        <p>{currContest.duration}</p>
+        <p>{currContest.instructions}</p>
+        <p>{currContest.prizes}</p>
+        <button>Join the Contest</button>
+      </div>
+      <div className='countdown'>
+      <ContestCountdownTimer/>
+      </div>
     </div>
   )
 }
@@ -124,7 +130,7 @@ function App() {
         {/* </Switch> */}
       </Routes>
       <NavBar name={name} setName={setName}/>
-      <Homepage name = {location.state.name}/>
+      <Homepage/>
       <Footer />
     </div>
   );
