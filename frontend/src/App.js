@@ -2,6 +2,7 @@ import './css/App.css';
 import React, { useEffect, useState } from 'react'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer';
+// import Puzzles from './pages/Puzzles';
 import ContestCountdownTimer from './components/ContestCountdownTimer';
 import sudoku from './images/Sudoku.png'
 import bacon from './images/Question 2.png'
@@ -106,6 +107,10 @@ function App() {
   const location = useLocation();
   console.log(location)
   const [name, setName] = useState('');
+
+  useEffect(() => {
+    document.title = 'Puzzler - The Puzzling Place';
+  }, []);
 
   useEffect(() => {
     (
