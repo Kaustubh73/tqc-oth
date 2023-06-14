@@ -44,6 +44,32 @@ class LoginView(APIView):
         }
         return response
     
+class PuzzleView(APIView):
+    def post(self, request):
+        puzzle_ans = request.data['answer']
+        puzzle_userans = request.data['userans']
+        token = request.COOKIES.get('jwt')
+        if not token:
+            raise AuthenticationFailed('Unauthenticated!')
+        
+        try:
+            payload = jwt.decode(token, 'secret', algorithms=['HS256'])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed('Unauthenticated!')
+
+        user = User.objects.filter(id=payload['id']).first()           
+        
+        if puzzle_ans == puzzle_userans:   
+            user.solved_count += 1
+            user.save()
+            
+            return Response({'message': '1'})
+        else:
+             return Response({'error': 'Incorrect answer'}, status=status.HTTP_400_BAD_REQUEST)           
+
+        
+        
+    
 class UserView(APIView):
     def get(self, request):
         token = request.COOKIES.get('jwt')

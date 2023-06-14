@@ -11,7 +11,7 @@ function Desktop(props) {
             {/* Add your navigation links here */}
             <ul>
                 <li><Link to="/" ><img src = {logo}  className='logo' alt='Homepage'/></Link></li>
-                <li className='nav-text'><Link to="/puzzles"> Puzzles</Link></li>
+                <li className='nav-text'><Link to="/puzzles?user"> Puzzles</Link></li>
                 <li className='nav-text'><Link to="/contests">Contests</Link></li>
                 <li className='nav-text'><Link to="/leaderboard">Leaderboard</Link></li>
                 <li className='nav-text'><Link to="/contactus">Contact Us</Link></li>

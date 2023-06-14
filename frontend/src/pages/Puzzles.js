@@ -6,7 +6,7 @@ import puzzle1 from '../images/Sudoku.png'
 import puzzle2 from '../images/Question 2.png'
 import puzzle3 from '../images/Question 3.png'
 import PuzzleDetails from './Puzzle1';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useParams } from 'react-router-dom';
 
 function Puzzles() {
   const puzzles = [
@@ -25,6 +25,7 @@ function Puzzles() {
 
   // // Assume you have an array of puzzle objects
   const masonryRef = useRef(null);
+  const [name, setName] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredPuzzles, setFilteredPuzzles] = useState(puzzles);
   const navigate = useNavigate();
@@ -62,14 +63,28 @@ function Puzzles() {
     );
   }, [searchQuery, puzzles]);
 
+  useEffect(() => {
+    (
+      async () => {
+        const response = await fetch('http://localhost:8000/api/user', {
+            headers: {'Content-Type': 'application/json'},
+            credentials: 'include',
+        });
 
+        const content = await response.json();
+
+        setName(content.name);
+      }
+    )();
+  });
   return (
     <div>
-        <NavBar/>
+        <NavBar name={name} setName={setName}/>
         <div className='search-container'>
           <input 
             type='text'
             placeholder='Search puzzles...'
+            // placeholder={user}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -84,7 +99,9 @@ function Puzzles() {
           </Link>
         ))}
         </div>
-    </div>
+
+
+   </div>
   );
 }
 
