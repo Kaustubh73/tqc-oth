@@ -9,7 +9,23 @@ class User(AbstractUser):
     password = models.CharField(max_length=255)
     username = None
     solved_count = models.IntegerField(default=0)
+    solved_puzzles = models.TextField(blank=True)
 
+    def add_solved_puzzle(self, puzzle_id):
+        if not self.solved_puzzles:
+            self.solved_puzzles = str(puzzle_id)
+        else:
+            solved_puzzles_list = self.solved_puzzles.split(',')
+            if str(puzzle_id) not in solved_puzzles_list:
+                solved_puzzles_list.append(str(puzzle_id))
+                self.solved_puzzles = ','.join(solved_puzzles_list)
+        self.save()
+
+    def has_solved_puzzle(self, puzzle_id):
+        if not self.solved_puzzles:
+            return False
+        solved_puzzles_list = self.solved_puzzles.split(',')
+        return str(puzzle_id) in solved_puzzles_list
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 

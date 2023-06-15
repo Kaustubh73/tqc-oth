@@ -46,6 +46,7 @@ class LoginView(APIView):
     
 class PuzzleView(APIView):
     def post(self, request):
+        puzzle_id =request.data['puzzleId']
         puzzle_ans = request.data['answer']
         puzzle_userans = request.data['userans']
         token = request.COOKIES.get('jwt')
@@ -58,8 +59,10 @@ class PuzzleView(APIView):
             raise AuthenticationFailed('Unauthenticated!')
 
         user = User.objects.filter(id=payload['id']).first()           
-        
-        if puzzle_ans == puzzle_userans:   
+        if user.has_solved_puzzle(puzzle_id):
+            return Response({'message': 'Congratulations! You solved the puzzle.'})
+        elif puzzle_ans == puzzle_userans:
+            user.add_solved_puzzle(puzzle_id)
             user.solved_count += 1
             user.save()
             

@@ -3,74 +3,49 @@ import NavBar from '../components/NavBar';
 import puzzle1 from '../images/Sudoku.png';
 import { useState, useEffect } from 'react';
 
-function Userhere() {
-    return (
-        <div>
-            <h1>User found</h1>
-            <h1>User found</h1>
-            <h1>User found</h1>
-        </div>
-    );
-}
 
-function Usernot() {
-    return (
-        <div>
-            <p>Please log in first to submit your answer</p>
-        </div>
-    );
-}
-
-function Yo(props) {
-    const ansCheck = props.ansCheck;
-    if (ansCheck === '1')
-    {
-        return (
-            <div>
-                <h1>Right answer</h1>
-                <h1>Right answer</h1>
-                <h1>Right answer</h1>
-                <h1>Right answer</h1>
-            </div>
-        );
-    }
-    return (
-        <div>
-            <h1>{ansCheck}</h1>
-            <h1>Wrong answer</h1>
-            <h1>Wrong answer</h1>
-            <h1>Wrong answer</h1>
-            <h1>Wrong answer</h1>
-        </div>
-    );
-
-}
 function Puzzle1() {
     const [name, setName] = useState('');
     const [userans, setUserAns] = useState('');
     const [userCheck, setUserCheck] = useState('');
-    const [ansCheck, setAnsCheck] = useState('');
+    const [isCorrect, setIsCorrect] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
+    const [message, setMessage] = useState('');
+    const [solved, setSolved] = useState(false);
+    const [solvedPuzzles, setSolvedPuzzles] = useState('');
     const answer = 'cream';
+    const puzzleId = 'Puzzle 1'
     
     const handleSubmit = async(e) => {
         e.preventDefault();
-        if (name)
-        {
-        const response = await fetch('http://localhost:8000/api/puzzle', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            credentials: 'include',
-            body: JSON.stringify({
-                answer,
-                userans
-            })
-        });
+        try {
+            if (name)
+            {
+            const response = await fetch('http://localhost:8000/api/puzzle', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                credentials: 'include',
+                body: JSON.stringify({
+                    puzzleId,
+                    answer,
+                    userans
+                })
+            });
 
+            if (response.status === 200) {
+                // Puzzle solved successfully
+                console.log('Puzzle solved!');
+                setIsCorrect(true);
+            } 
             const content = await response.json();
-            setAnsCheck(content.message);
+            setSolved(content.message == 'Congratulations! You solved the puzzle.');
+            setSubmitted(true);
+            }
         }
-        // {name ? <Userhere/>: <Usernot/>}
-        }
+        catch (error) {
+            console.error(error);
+        }     
+        };
 
     useEffect(() => {
         (
@@ -81,8 +56,9 @@ function Puzzle1() {
             });
     
             const content = await response.json();
-    
+            setSolvedPuzzles(content.solved_puzzles);
             setName(content.name);
+            setSolved(solvedPuzzles.includes(puzzleId.toString()));
           }
         )();
       });
@@ -91,6 +67,10 @@ function Puzzle1() {
             <NavBar name={name} setName={setName}/>
             <h2>Puzzle 1</h2>
             <img src={puzzle1} alt='Sudoku'/>
+            {message && <p>{message}</p>}
+            {solved ? (<p>You have already solved this puzzle. The answer is CREAM.</p>) : (submitted && isCorrect ? (<p>Congratulations, the answer was CREAM indeed. Do you understand how it works?</p>)
+            :
+            (
             <form onSubmit={handleSubmit}>
             <input 
                 type='answer'
@@ -99,10 +79,11 @@ function Puzzle1() {
                 required
                 onChange={(e) => setUserAns(e.target.value.toLowerCase())}
             />
-            <button type='submit' onClick={()=>setUserCheck(!userCheck)}>Submit</button>
+            <button type='submit' onClick={()=>setUserCheck(true)}>Submit</button>
             </form>
-            <Yo ansCheck = {ansCheck}/>
-`           {userCheck? (name ? <Userhere/>: <Usernot/>): <p></p>}
+            ))}
+`           {userCheck? (name ? <p/>:<p>Please log in first to submit your answer</p>): <p></p>}
+            {submitted? (isCorrect ? <div></div> : <div><p>The answer is wrong!</p></div>) :<p></p>}
         </div>
      );
 }
