@@ -28,6 +28,7 @@ function Puzzles() {
   const [name, setName] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredPuzzles, setFilteredPuzzles] = useState(puzzles);
+  const [solvedPuzzles, setSolvedPuzzles] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -74,6 +75,10 @@ function Puzzles() {
         const content = await response.json();
 
         setName(content.name);
+        if (name)
+        {
+          setSolvedPuzzles(content.solved_puzzles);
+        }
       }
     )();
   });
@@ -81,6 +86,7 @@ function Puzzles() {
     <div>
         <NavBar name={name} setName={setName}/>
         <div className='search-container'>
+          <h1>Puzzles</h1>
           <input 
             type='text'
             placeholder='Search puzzles...'
@@ -92,7 +98,7 @@ function Puzzles() {
         <div className="puzzles-container">
         {filteredPuzzles.map((puzzle) => (
           <Link to={puzzle.link} className='puzzle-link' key={puzzle.id}>
-            <div className="puzzle-item">
+            <div className={`puzzle-item ${solvedPuzzles.includes(puzzle.title) ? 'solved' : ''}`}>
               <img src={puzzle.imageUrl} alt={puzzle.title} className='puzzle-image' />
               <h3>{puzzle.title}</h3>
             </div>

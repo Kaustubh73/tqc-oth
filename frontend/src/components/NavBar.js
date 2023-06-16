@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../css/Header.css';
 import logo from '../images/Puzzle1.jpg';
 import menu from '../images/MenuBar.png';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Desktop(props) {
+    const location = useLocation();
+
+    useEffect(() => {
+      // Exclude the login page from storing the previous URL
+      if (location.pathname !== '/login') {
+        sessionStorage.setItem('previousUrl', location.pathname);
+        // Or localStorage.setItem('previousUrl', location.pathname);
+      }
+    }, [location]);
+  
+  
     return (
         <header className='header'>
         <nav className='nav'>
@@ -57,13 +68,12 @@ function NavBar(props) {
             headers: {'Content-Type': 'application/json'},
             credentials: 'include',
         });
-
         props.setName('');
     }    
     const isMobile = window.innerWidth <= 768;
     return (
         <div>
-            {isMobile ? <DropDown/> : <Desktop name={props.name} logout={logout}/>}
+            {isMobile ? <DropDown/> : <Desktop name={props.name} setName={props.setName} logout={logout}/>}
         </div>
     );
 }

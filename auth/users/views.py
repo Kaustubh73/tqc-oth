@@ -2,8 +2,9 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
-from  .serializers import UserSerializer
+from  .serializers import UserSerializer, LeaderboardSerializer
 from .models import User
+from rest_framework import status
 import jwt, datetime
 
 
@@ -68,11 +69,14 @@ class PuzzleView(APIView):
             
             return Response({'message': '1'})
         else:
-             return Response({'error': 'Incorrect answer'}, status=status.HTTP_400_BAD_REQUEST)           
+                return Response({'error': 'Incorrect answer'}, status=status.HTTP_400_BAD_REQUEST)           
 
-        
-        
-    
+class LeaderboardView(APIView):
+    def get(self, request):
+        leaderboard_data = User.objects.all().order_by('-solved_count')
+        serializer = LeaderboardSerializer(leaderboard_data, many=True)
+        return Response(serializer.data)
+
 class UserView(APIView):
     def get(self, request):
         token = request.COOKIES.get('jwt')
@@ -97,5 +101,4 @@ class LogoutView(APIView):
         response.data = {
             'message': 'success'
         }
-         
         return response

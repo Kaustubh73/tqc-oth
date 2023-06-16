@@ -1,6 +1,7 @@
 import React from 'react';
 import NavBar from '../components/NavBar';
 import puzzle1 from '../images/Sudoku.png';
+import '../css/Puzzle.css'
 import { useState, useEffect } from 'react';
 
 
@@ -38,7 +39,7 @@ function Puzzle1() {
                 setIsCorrect(true);
             } 
             const content = await response.json();
-            setSolved(content.message == 'Congratulations! You solved the puzzle.');
+            setSolved(content.message === 'Congratulations! You solved the puzzle.');
             setSubmitted(true);
             }
         }
@@ -56,19 +57,23 @@ function Puzzle1() {
             });
     
             const content = await response.json();
-            setSolvedPuzzles(content.solved_puzzles);
             setName(content.name);
+            if (name)
+            {
+            setSolvedPuzzles(content.solved_puzzles);
             setSolved(solvedPuzzles.includes(puzzleId.toString()));
+            }   
           }
         )();
       });
     return ( 
-        <div className='puzzle-details'>
+        <div>
             <NavBar name={name} setName={setName}/>
-            <h2>Puzzle 1</h2>
+            <div className='puzzle-details'>
+            <h2>Sudoku Time!</h2>
             <img src={puzzle1} alt='Sudoku'/>
             {message && <p>{message}</p>}
-            {solved ? (<p>You have already solved this puzzle. The answer is CREAM.</p>) : (submitted && isCorrect ? (<p>Congratulations, the answer was CREAM indeed. Do you understand how it works?</p>)
+            {solved ? (<p className='right-message'> You have already solved this puzzle. The answer is CREAM.</p>) : (submitted && isCorrect ? (<p className='right-message'>Congratulations, the answer was CREAM indeed. Do you understand how it works?</p>)
             :
             (
             <form onSubmit={handleSubmit}>
@@ -82,8 +87,9 @@ function Puzzle1() {
             <button type='submit' onClick={()=>setUserCheck(true)}>Submit</button>
             </form>
             ))}
-`           {userCheck? (name ? <p/>:<p>Please log in first to submit your answer</p>): <p></p>}
-            {submitted? (isCorrect ? <div></div> : <div><p>The answer is wrong!</p></div>) :<p></p>}
+`           {userCheck? (name ? <p/>:<p className='error-message'>Please log in first to submit your answer</p>): <p></p>}
+            {submitted? (isCorrect ? <div></div> : <div><p className='error-message'>The answer is wrong!</p></div>) :<p></p>}
+            </div>
         </div>
      );
 }

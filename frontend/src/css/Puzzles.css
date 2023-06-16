@@ -1,3 +1,9 @@
+.puzzles {
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .puzzles-container {
     display: grid;
     grid-auto-flow: dense;
@@ -53,4 +59,11 @@
 
 .search-container {
     margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.solved {
+    background-color: lightgreen;
 }

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import '../css/Signup.css'
 
 function Login(props) {
+    const previousUrl = sessionStorage.getItem('previousUrl');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
@@ -29,7 +30,11 @@ function Login(props) {
     }
 
     if (redirect) {
-        navigate('/',  { state: { name: props.name, setName:props.setName } })
+        if (previousUrl && previousUrl !== '/login') {
+            navigate(previousUrl);
+          } else {
+            navigate('/');
+          }
     }
 
     return (
@@ -37,6 +42,7 @@ function Login(props) {
             <NavBar></NavBar>
             <div className='sign-up'>
                 <h1>Login</h1>
+                <h1>{previousUrl}</h1>
                 <form onSubmit={handleLogin}>
                     <input 
                         type='email'
