@@ -3,6 +3,7 @@ import NavBar from '../components/NavBar';
 import puzzle3 from '../images/Question 3.png';
 import '../css/Puzzle.css'
 import { useState, useEffect } from 'react';
+import Footer from '../components/Footer';
 
 
 function Puzzle1() {
@@ -48,24 +49,32 @@ function Puzzle1() {
         }     
         };
 
-    useEffect(() => {
-        (
-          async () => {
-            const response = await fetch('http://localhost:8000/api/user', {
-                headers: {'Content-Type': 'application/json'},
-                credentials: 'include',
-            });
-    
-            const content = await response.json();
-            setName(content.name);
-            if (name)
-            {
-            setSolvedPuzzles(content.solved_puzzles);
-            setSolved(solvedPuzzles.includes(puzzleId.toString()));
-            }   
-          }
-        )();
-      });
+        useEffect(() => {
+            (async () => {
+              try {
+                const response = await fetch('http://localhost:8000/api/user', {
+                  headers: { 'Content-Type': 'application/json' },
+                  credentials: 'include',
+                });
+          
+                if (response.ok) {
+                  const content = await response.json();
+                  setName(content.name);
+                  if (name)
+                  {
+                    setSolvedPuzzles(content.solved_puzzles);
+                    setSolved(solvedPuzzles.includes(puzzleId.toString()));
+                  }   
+                } else {
+                  // Handle non-successful response
+                  throw new Error('Failed to fetch user data');
+                }
+              } catch (error) {
+                // Handle fetch error
+                console.error(error);
+              }
+            })();
+          }, []);
     return ( 
         <div>
             <NavBar name={name} setName={setName}/>
@@ -90,6 +99,7 @@ function Puzzle1() {
 `           {userCheck? (name ? <p/>:<p className='error-message'>Please log in first to submit your answer</p>): <p></p>}
             {submitted? (isCorrect ? <div></div> : <div><p className='error-message'>The answer is wrong!</p></div>) :<p></p>}
             </div>
+            <Footer/>
         </div>
      );
 }

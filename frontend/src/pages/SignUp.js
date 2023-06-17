@@ -2,6 +2,7 @@ import React, { useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import '../css/Signup.css'
+import Footer from '../components/Footer';
 
 function SignUp(props) { 
     const [name, setName] = useState('');
@@ -56,6 +57,7 @@ function SignUp(props) {
                     <button type='submit'>Submit</button>
                 </form>
             </div>
+            <Footer/>
         </div>
     );
 }

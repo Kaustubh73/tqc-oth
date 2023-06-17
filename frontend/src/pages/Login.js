@@ -42,7 +42,6 @@ function Login(props) {
             <NavBar></NavBar>
             <div className='sign-up'>
                 <h1>Login</h1>
-                <h1>{previousUrl}</h1>
                 <form onSubmit={handleLogin}>
                     <input 
                         type='email'

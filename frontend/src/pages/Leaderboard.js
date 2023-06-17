@@ -1,45 +1,56 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../components/NavBar';
 import '../css/Leaderboard.css'
+import Footer from '../components/Footer';
 
 
 function Leaderboard() {
-    const [solvedPuzzles, setSolvedPuzzles] = useState('');
     const [name, setName] = useState('');
     const [leaderboard, setLeaderboard] = useState([]);
 
     useEffect(() => {
         (
           async () => {
+            try {
             const response = await fetch('http://localhost:8000/api/leaderboard', {
                 headers: {'Content-Type': 'application/json'},
                 credentials: 'include',
             });
-      
+            
             const content = await response.json();
             try {
                 setLeaderboard(content);
             } catch {
                 console.error('Error fetching leaderboard');
             }
+          } catch (error) {
+                console.error(error);
           }
+        }
         )(); 
       }, []);
       
       useEffect(() => {
-        (
-          async () => {
+        (async () => {
+          try {
             const response = await fetch('http://localhost:8000/api/user', {
-                headers: {'Content-Type': 'application/json'},
-                credentials: 'include',
+              headers: { 'Content-Type': 'application/json' },
+              credentials: 'include',
             });
-    
-            const content = await response.json();
-    
-            setName(content.name);
+      
+            if (response.ok) {
+              const content = await response.json();
+              setName(content.name);
+            } else {
+              // Handle non-successful response
+              throw new Error('Failed to fetch user data');
+            }
+          } catch (error) {
+            // Handle fetch error
+            console.error(error);
           }
-        )();
-      });
+        })();
+      }, []);
       
     return ( 
         <div>
@@ -69,6 +80,7 @@ function Leaderboard() {
                     </table>
                 )}              
             </div>
+            <Footer/>
         </div>
      );
 }

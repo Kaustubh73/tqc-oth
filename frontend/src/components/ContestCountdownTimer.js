@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../css/ContestCountdownTimer.css'
 
 function ContestCountdownTimer() {
-    const contestEndDate = new Date('2023-06-15T23:59:59');
+    const contestEndDate = new Date('2023-06-20T23:59:59');
 
     const [remainingTime, setRemainingTime] = useState(0);
 

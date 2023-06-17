@@ -113,19 +113,27 @@ function App() {
   }, []);
 
   useEffect(() => {
-    (
-      async () => {
+    (async () => {
+      try {
         const response = await fetch('http://localhost:8000/api/user', {
-            headers: {'Content-Type': 'application/json'},
-            credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
         });
-
-        const content = await response.json();
-
-        setName(content.name);
+  
+        if (response.ok) {
+          const content = await response.json();
+          setName(content.name);
+        } else {
+          // Handle non-successful response
+          throw new Error('Failed to fetch user data');
+        }
+      } catch (error) {
+        // Handle fetch error
+        console.error(error);
       }
-    )();
-  });
+    })();
+  }, []);
+  
   return (
     <div className="App">
       <Routes>

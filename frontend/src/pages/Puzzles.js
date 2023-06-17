@@ -5,14 +5,14 @@ import NavBar from '../components/NavBar';
 import puzzle1 from '../images/Sudoku.png'
 import puzzle2 from '../images/Question 2.png'
 import puzzle3 from '../images/Question 3.png'
-import PuzzleDetails from './Puzzle1';
-import { useNavigate, Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Footer from '../components/Footer';
 
 function Puzzles() {
   const puzzles = [
-    { id: 1, link: '/puzzle1', imageUrl: puzzle1, title: 'Puzzle 1' },
-    { id: 2, link: '/puzzle2', imageUrl: puzzle2, title: 'Puzzle 2' },
-    { id: 3, link: '/puzzle3', imageUrl: puzzle3, title: 'Puzzle 3' },
+    { id: 1, link: '/puzzle1', imageUrl: puzzle1, title: 'Sudoku Time!' },
+    { id: 2, link: '/puzzle2', imageUrl: puzzle2, title: "What's shaking, _____?" },
+    { id: 3, link: '/puzzle3', imageUrl: puzzle3, title: 'Counting Magic' },
     { id: 4, link: '/puzzle4', imageUrl: 'puzzle4.jpg', title: 'Puzzle 4' },
     { id: 5, link: '/puzzle5', imageUrl: 'puzzle5.jpg', title: 'Puzzle 5' },
     { id: 6, link: '/puzzle6', imageUrl: 'puzzle6.jpg', title: 'Puzzle 6' },
@@ -20,7 +20,7 @@ function Puzzles() {
     // { id: 8, link: '/puzzle8', imageUrl: 'puzzle8.jpg', title: 'Puzzle 8' },
     // { id: 9, link: '/puzzle9', imageUrl: 'puzzle9.jpg', title: 'Puzzle 9' },
 
-    // Add more puzzle objects as needed
+    // Add more puzzle objects as neededzzles
   ];
 
   // // Assume you have an array of puzzle objects
@@ -29,7 +29,6 @@ function Puzzles() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredPuzzles, setFilteredPuzzles] = useState(puzzles);
   const [solvedPuzzles, setSolvedPuzzles] = useState('');
-  const navigate = useNavigate();
 
   useEffect(() => {
     masonryRef.current = new Masonry('.puzzles-container', {
@@ -65,23 +64,28 @@ function Puzzles() {
   }, [searchQuery, puzzles]);
 
   useEffect(() => {
-    (
-      async () => {
+    (async () => {
+      try {
         const response = await fetch('http://localhost:8000/api/user', {
-            headers: {'Content-Type': 'application/json'},
-            credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
         });
-
-        const content = await response.json();
-
-        setName(content.name);
-        if (name)
-        {
-          setSolvedPuzzles(content.solved_puzzles);
+  
+        if (response.ok) {
+          const content = await response.json();
+          setName(content.name);
+          if (name)
+          {
+            setSolvedPuzzles(content.solved_puzzles);
+          }
+        } else {
+          throw new Error('Failed to fetch user data');
         }
+      } catch (error) {
+        console.error(error);
       }
-    )();
-  });
+    })();
+  }, []);
   return (
     <div>
         <NavBar name={name} setName={setName}/>
@@ -105,8 +109,7 @@ function Puzzles() {
           </Link>
         ))}
         </div>
-
-
+          <Footer/>
    </div>
   );
 }
